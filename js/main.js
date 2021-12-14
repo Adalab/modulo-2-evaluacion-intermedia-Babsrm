@@ -9,7 +9,8 @@ let machinaCounter = document.getElementById(".js-playerCounter");
 const resultMsg = document.querySelector(".js-resultMessage");
 const resetButton = document.querySelector(".js-resetButton");
 let counterGame = 1;
-
+let counterPlayer = 0;
+let counterMachina = 0;
 //funciones
 
 function getRandom(max) {
@@ -20,13 +21,13 @@ function playMachina() {
   let machinaValue;
   if (randomNum < 3) {
     machinaValue = "rock";
-    console.log ("piedra ordenador")
+    console.log("piedra ordenador");
   } else if (randomNum <= 6) {
     machinaValue = "paper";
-    console.log ("papel ordenador")
+    console.log("papel ordenador");
   } else if (randomNum <= 9) {
     machinaValue = "scissors";
-    console.log ("tijeras ordenador")
+    console.log("tijeras ordenador");
   }
   return machinaValue;
 }
@@ -37,33 +38,36 @@ function letsPlay(userValue) {
   //comparamos valores de value
   if (userValue === machinaValue) {
     resultMsg.innerHTML = "¡Empate!";
-    userCounter ++;
-    machinaCounter ++;
+    counterPlayer++;
+    counterMachina++;
   } else if (userValue === "rock") {
     if (machinaValue === "paper") {
-     resultMsg.innerHTML = "¡Ganaste!";
-     userCounter ++;
+      resultMsg.innerHTML = "¡Ganaste!";
+      counterPlayer++;
     } else {
       resultMsg.innerHTML = "¡Perdiste!";
-      machinaCounter ++;
+      counterMachina++;
     }
   } else if (userValue === "paper") {
     if (machinaValue === "rock") {
       resultMsg.innerHTML = "¡Ganaste!";
-      userCounter ++;
+      counterPlayer++;
     } else {
       resultMsg.innerHTML = "¡Perdiste!";
-      machinaCounter ++;
+      counterMachina++;
     }
   } else if (userValue === "scissors") {
     if (machinaValue === "paper") {
       resultMsg.innerHTML = "¡Ganaste!";
-      userCounter ++;
+      counterPlayer++;
     } else {
       resultMsg.innerHTML = "¡Perdiste!";
-      machinaCounter ++;
+      counterMachina++;
     }
   }
+ // ESTA FUNCION DA ERROR Y NO SÉ POR QUÉ
+ // userCounter.innerHTML = `${counterPlayer}`;  
+ //machinaCounter.innerHTML = `${counterMachina}`;  
 }
 function handleClickUpdate(event) {
   event.preventDefault();
@@ -75,12 +79,11 @@ function handleClickUpdate(event) {
 playButton.addEventListener("click", handleClickUpdate);
 
 function counter() {
-    console.log(counterGame);
-    if (counterGame === 10) {
-        playButton.classList.add("hidden");
-        resetButton.classList.remove("hidden");
-      }
-    else{
-     counterGame ++;   
-    }
+  console.log(counterGame);
+  if (counterGame === 10) {
+    playButton.classList.add("hidden");
+    resetButton.classList.remove("hidden");
+  } else {
+    counterGame++;
+  }
 }
