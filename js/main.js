@@ -4,8 +4,8 @@
 
 const playButton = document.querySelector(".js_playbutton");
 const optionSelect = document.querySelector(".js_selectoption");
-let userCounter = document.getElementById(".js-playerCounter");
-let machinaCounter = document.getElementById(".js-playerCounter");
+let userCounter = document.querySelector(".js-playerCounter");
+let machinaCounter = document.querySelector(".js-machinaCounter");
 const resultMsg = document.querySelector(".js-resultMessage");
 const resetButton = document.querySelector(".js-resetButton");
 let counterGame = 1;
@@ -65,9 +65,9 @@ function letsPlay(userValue) {
       counterMachina++;
     }
   }
- // ESTA FUNCION DA ERROR Y NO SÉ POR QUÉ
- // userCounter.innerHTML = `${counterPlayer}`;  
- //machinaCounter.innerHTML = `${counterMachina}`;  
+
+ userCounter.innerHTML = counterPlayer;  
+ machinaCounter.innerHTML = counterMachina;  
 }
 function handleClickUpdate(event) {
   event.preventDefault();
