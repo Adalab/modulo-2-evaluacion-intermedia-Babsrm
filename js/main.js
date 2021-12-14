@@ -4,10 +4,11 @@
 
 const playButton = document.querySelector(".js_playbutton");
 const optionSelect = document.querySelector(".js_selectoption");
-let userCounter = document.querySelector(".js-playerCounter");
-let machinaCounter = document.querySelector("js-playerCounter");
-const resultMsg = document.querySelector("js-resultMessage");
-const resetButton = document.querySelector("js-resetButton");
+let userCounter = document.getElementById(".js-playerCounter");
+let machinaCounter = document.getElementById(".js-playerCounter");
+const resultMsg = document.querySelector(".js-resultMessage");
+const resetButton = document.querySelector(".js-resetButton");
+let counterGame = 1;
 
 //funciones
 
@@ -36,23 +37,31 @@ function letsPlay(userValue) {
   //comparamos valores de value
   if (userValue === machinaValue) {
     resultMsg.innerHTML = "¡Empate!";
+    userCounter ++;
+    machinaCounter ++;
   } else if (userValue === "rock") {
     if (machinaValue === "paper") {
      resultMsg.innerHTML = "¡Ganaste!";
+     userCounter ++;
     } else {
       resultMsg.innerHTML = "¡Perdiste!";
+      machinaCounter ++;
     }
   } else if (userValue === "paper") {
     if (machinaValue === "rock") {
       resultMsg.innerHTML = "¡Ganaste!";
+      userCounter ++;
     } else {
       resultMsg.innerHTML = "¡Perdiste!";
+      machinaCounter ++;
     }
   } else if (userValue === "scissors") {
     if (machinaValue === "paper") {
       resultMsg.innerHTML = "¡Ganaste!";
+      userCounter ++;
     } else {
       resultMsg.innerHTML = "¡Perdiste!";
+      machinaCounter ++;
     }
   }
 }
@@ -61,14 +70,17 @@ function handleClickUpdate(event) {
   const userValue = optionSelect.value;
   console.log(userValue);
   letsPlay(userValue);
-  counter++;
+  counter();
 }
 playButton.addEventListener("click", handleClickUpdate);
 
 function counter() {
-    counterGame = counterGame + 1;
+    console.log(counterGame);
     if (counterGame === 10) {
         playButton.classList.add("hidden");
         resetButton.classList.remove("hidden");
       }
+    else{
+     counterGame ++;   
+    }
 }
