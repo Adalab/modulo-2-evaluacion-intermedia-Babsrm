@@ -1,73 +1,74 @@
-'use strict';
+"use strict";
 
 //Variables globales
 
-const playButton = document.querySelector('.js_playbutton');
-const optionSelect = document.querySelector('.js_selectoption');
-
+const playButton = document.querySelector(".js_playbutton");
+const optionSelect = document.querySelector(".js_selectoption");
+let userCounter = document.querySelector(".js-playerCounter");
+let machinaCounter = document.querySelector("js-playerCounter");
+const resultMsg = document.querySelector("js-resultMessage");
+const resetButton = document.querySelector("js-resetButton");
 
 //funciones
 
 function getRandom(max) {
-    return Math.ceil(Math.random() * max);
+  return Math.ceil(Math.random() * max);
 }
 function playMachina() {
-    const randomNum = getRandom(9);
-    let machinaValue;
-    if (randomNum < 3) {
-        machinaValue = "rock";
-    }
-    else if (randomNum <= 6) {
-        machinaValue = "paper";
-    }
-    else if (randomNum <= 9) {
-        machinaValue = "scissors";
-    }
-    return machinaValue;
+  const randomNum = getRandom(9);
+  let machinaValue;
+  if (randomNum < 3) {
+    machinaValue = "rock";
+    console.log ("piedra ordenador")
+  } else if (randomNum <= 6) {
+    machinaValue = "paper";
+    console.log ("papel ordenador")
+  } else if (randomNum <= 9) {
+    machinaValue = "scissors";
+    console.log ("tijeras ordenador")
+  }
+  return machinaValue;
 }
 
 function letsPlay(userValue) {
-    //cogemos el valor
-    const machinaValue = playMachina();
-    console.log(machinaValue);
-    //comparamos valores de value
-    if (userValue === machinaValue) {
-        document.getElementById('js-resultMessage').innerHTML = '¡Empate!';
+  //cogemos el valor
+  const machinaValue = playMachina();
+  //comparamos valores de value
+  if (userValue === machinaValue) {
+    resultMsg.innerHTML = "¡Empate!";
+  } else if (userValue === "rock") {
+    if (machinaValue === "paper") {
+     resultMsg.innerHTML = "¡Ganaste!";
+    } else {
+      resultMsg.innerHTML = "¡Perdiste!";
     }
-    else if (userValue === 'rock') {
-        if (machinaValue === 'paper') {
-            document.getElementById('js-resultMessage').innerHTML = '¡Ganaste!';
-        }
-        else { document.getElementById('js-resultMessage').innerHTML = '¡Perdiste!'; }}
-
-    else if (userValue === 'paper') {
-            if (machinaValue === 'rock') {
-                document.getElementById('js-resultMessage').innerHTML = '¡Ganaste!';
-            }
-            else { document.getElementById('js-resultMessage').innerHTML = '¡Perdiste!'; }}
-            else if (userValue === 'scissors') {
-                if (machinaValue === 'paper') {
-                    document.getElementById('js-resultMessage').innerHTML = '¡Ganaste!';
-                }
-                else { document.getElementById('js-resultMessage').innerHTML = '¡Perdiste!'; }
-
-            }}
-
-            function handleClickUpdate(event) {
-                event.preventDefault();
-                const userValue = optionSelect.value;
-                console.log(userValue);
-                letsPlay(userValue);
-            }
-            playButton.addEventListener('click', handleClickUpdate)
-
-/* ESTO CREO QUE NO ES ASI 
-function playMachina() {
-    //generamos numero aleatorio
-    const randomNum = getRandom(3);
-    if (randomNum === 1){maquinaValue = 'rock';
+  } else if (userValue === "paper") {
+    if (machinaValue === "rock") {
+      resultMsg.innerHTML = "¡Ganaste!";
+    } else {
+      resultMsg.innerHTML = "¡Perdiste!";
+    }
+  } else if (userValue === "scissors") {
+    if (machinaValue === "paper") {
+      resultMsg.innerHTML = "¡Ganaste!";
+    } else {
+      resultMsg.innerHTML = "¡Perdiste!";
+    }
+  }
 }
-else if (randomNum === 2){maquinaValue= 'paper';}
-else if (randomNum===3) {
-    maquinaValue='scissors'};
-}*/
+function handleClickUpdate(event) {
+  event.preventDefault();
+  const userValue = optionSelect.value;
+  console.log(userValue);
+  letsPlay(userValue);
+  counter++;
+}
+playButton.addEventListener("click", handleClickUpdate);
+
+function counter() {
+    counterGame = counterGame + 1;
+    if (counterGame === 10) {
+        playButton.classList.add("hidden");
+        resetButton.classList.remove("hidden");
+      }
+}
