@@ -8,49 +8,58 @@ const optionSelect = document.querySelector('.js_selectoption');
 
 //funciones
 
-function getRandom (max){
-    return Math.ceil (Math.random () * max);
+function getRandom(max) {
+    return Math.ceil(Math.random() * max);
+}
+function playMachina() {
+    const randomNum = getRandom(9);
+    let machinaValue;
+    if (randomNum < 3) {
+        machinaValue = "rock";
+    }
+    else if (randomNum <= 6) {
+        machinaValue = "paper";
+    }
+    else if (randomNum <= 9) {
+        machinaValue = "scissors";
+    }
+    return machinaValue;
 }
 
-function letsPlay (userValue) {
+function letsPlay(userValue) {
     //cogemos el valor
-    userValue = optionSelect.value;
-    machinaValue = playMachina.value;
+    const machinaValue = playMachina();
+    console.log(machinaValue);
     //comparamos valores de value
-    if (userValue === 1){
-        if (randomNum [playMaquina] === 1){
-            document.getElementById('js-resultMessage').innerHTML= '¡Empate!';
-        }
-        else if (randomNum [playMaquina] === 2){
-            document.getElementById('js-resultMessage').innerHTML= '¡Perdiste!';}
-        else if (randomNum [playMaquina] === 3){
-            document.getElementById('js-resultMessage').innerHTML= '¡Ganaste!';}
+    if (userValue === machinaValue) {
+        document.getElementById('js-resultMessage').innerHTML = '¡Empate!';
     }
-    if (userValue === 2){
-        if (randomNum [playMaquina] === 1){
-            document.getElementById('js-resultMessage').innerHTML= '¡Ganaste!';
+    else if (userValue === 'rock') {
+        if (machinaValue === 'paper') {
+            document.getElementById('js-resultMessage').innerHTML = '¡Ganaste!';
         }
-        else if (randomNum [playMaquina] === 2){
-            document.getElementById('js-resultMessage').innerHTML= '¡Empate!';}
-        else if (randomNum [playMaquina] === 3){
-            document.getElementById('js-resultMessage').innerHTML= '¡Perdiste!';}
-    }
-    if (userValue === 3){
-        if (randomNum  === 1){
-            document.getElementById('js-resultMessage').innerHTML= '¡Perdiste!';
-        }
-        else if (randomNum  === 2){
-            document.getElementById('js-resultMessage').innerHTML= '¡Ganaste!';}
-        else if (randomNum === 3){
-            document.getElementById('js-resultMessage').innerHTML= '¡Empate!';}
-    }
-}
+        else { document.getElementById('js-resultMessage').innerHTML = '¡Perdiste!'; }}
 
-function handleClickUpdate(event){
-    event.preventDefault();
-    letsPlay();
-}
-playButton.addEventListener('click', handleClickUpdate)
+    else if (userValue === 'paper') {
+            if (machinaValue === 'rock') {
+                document.getElementById('js-resultMessage').innerHTML = '¡Ganaste!';
+            }
+            else { document.getElementById('js-resultMessage').innerHTML = '¡Perdiste!'; }}
+            else if (userValue === 'scissors') {
+                if (machinaValue === 'paper') {
+                    document.getElementById('js-resultMessage').innerHTML = '¡Ganaste!';
+                }
+                else { document.getElementById('js-resultMessage').innerHTML = '¡Perdiste!'; }
+
+            }}
+
+            function handleClickUpdate(event) {
+                event.preventDefault();
+                const userValue = optionSelect.value;
+                console.log(userValue);
+                letsPlay(userValue);
+            }
+            playButton.addEventListener('click', handleClickUpdate)
 
 /* ESTO CREO QUE NO ES ASI 
 function playMachina() {
